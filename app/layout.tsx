@@ -14,6 +14,7 @@ import { SiteHeader } from "@/components/site-header";
 export const metadata = {
   title: "Echo Jot",
   description: "Local-first markdown journaling app",
+  
 };
 
 export default function RootLayout({ children }: { children: ReactNode }) {
@@ -44,6 +45,7 @@ export default function RootLayout({ children }: { children: ReactNode }) {
                 </main>
               </SidebarInset>
             </SidebarProvider>
+
           </ThemeProvider>
         </body>
       </html>
