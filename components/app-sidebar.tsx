@@ -1,7 +1,7 @@
-"use client"
+"use client";
 
-import Link from "next/link"
-import * as React from "react"
+import Link from "next/link";
+import * as React from "react";
 import {
   IconCamera,
   IconFileAi,
@@ -14,11 +14,11 @@ import {
   IconPencilMinus,
   IconNotebook,
   IconHash,
-} from "@tabler/icons-react"
+} from "@tabler/icons-react";
 
-import { NavTags } from "@/components/nav-tags"
-import { NavMain } from "@/components/nav-main"
-import { NavSecondary } from "@/components/nav-secondary"
+import { NavTags } from "@/components/nav-tags";
+import { NavMain } from "@/components/nav-main";
+import { NavSecondary } from "@/components/nav-secondary";
 import {
   Sidebar,
   SidebarContent,
@@ -27,14 +27,15 @@ import {
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
+import { Calendar } from "@/components/ui/calendar";
 
 const data = {
   navMain: [
     {
       title: "Journal",
       url: "/journal",
-      icon: IconNotebook ,
+      icon: IconNotebook,
     },
     {
       title: "Notes",
@@ -45,7 +46,7 @@ const data = {
   navSecondary: [
     {
       title: "Settings",
-      url: "#",
+      url: "/settings",
       icon: IconSettings,
     },
     {
@@ -71,9 +72,11 @@ const data = {
       icon: IconHash,
     },
   ],
-}
+};
 
 export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  const [date, setDate] = React.useState<Date | undefined>(new Date());
+
   return (
     <Sidebar collapsible="offcanvas" {...props}>
       <SidebarHeader>
@@ -92,13 +95,19 @@ export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
         </SidebarMenu>
       </SidebarHeader>
       <SidebarContent>
+        <Calendar
+          mode="single"
+          selected={date}
+          onSelect={setDate}
+          className="flex justify-center p-2"
+        />
         <NavMain items={data.navMain} />
+
         <NavTags items={data.tags} />
-        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarContent>
       <SidebarFooter>
-
+        <NavSecondary items={data.navSecondary} className="mt-auto" />
       </SidebarFooter>
     </Sidebar>
-  )
+  );
 }
